@@ -1,11 +1,10 @@
-# Asynchronous programming in Java with CompletableFuture
+#Java Asynchronous Programming with CompletableFuture
 
+Overview
 
-## Introduction
+The CompletableFuture API serves as an advanced interface for asynchronous programming in Java. This API facilitates the linking (also referred to as chaining or merging) of numerous asynchronous computations into a unified outcome without the complications of nested callbacks, commonly known as "callback hell." Furthermore, this API serves as an embodiment of the concurrent constructs for futures and promises in Java.
 
-The CompletableFuture API is a high-level API for asynchronous programming in Java. This API supports _pipelining_ (also known as _chaining_ or _combining_) of multiple asynchronous computations into a single result without the mess of nested callbacks (“callback hell“). This API also is an implementation of the _future/promise_ concurrency constructs in Java.
-
-Since Java 5 there is a much simpler API for asynchronous programming: the _Future_ interface and its base implementation, the _FutureTask_ class. The _Future_ interface represents the _result_ of asynchronous computation and has only a few methods:
+Starting from Java 5, a more uncomplicated API for asynchronous programming has been introduced: the Future interface and its fundamental implementation, the FutureTask class. The Future interface symbolizes the outcome of asynchronous computations and includes only a handful of methods:
 
 
 
@@ -26,11 +25,11 @@ To overcome these limitations, Java 8 added (and Java 9 and Java 12 updated) the
 However, the CompletableFuture API is not simple. The _CompletionStage_ interface has 43 public methods. The _CompletableFuture_ class implements 5 methods from the _Future_ interface, 43 methods from the _CompletionStage_ interface, and has 30 of its public methods. This article describes only the most useful methods of the CompletableFuture API. 
 
 
-## Futures and promises
+#Futures and Promises
 
-Future/promise are the high-level concurrency constructs that decouple a value (a future) from the way it is computed (a promise). That allows writing more fluent concurrent programs that transfer objects between threads without using any explicit synchronization mechanisms. The future/promise constructs are often used when multiple threads work on different tasks, and the results need to be combined by the main thread. 
+Futures and promises are the high-level concurrency constructs that separate a value (a future) from the way it is computed (a promise). This decoupling allows for the creation of more seamless concurrent programs that transfer objects between threads without the need for explicit synchronization mechanisms. Futures and promises are often employed when multiple threads are working on different tasks, and their results need to be combined by the main thread.
 
-Implementations of future/promise exist in many programming languages:
+Implementations of futures and promises exist in many programming languages:
 
 
 
@@ -65,8 +64,6 @@ The following code example can help you to understand the use of the _Completabl
 Let’s implement the following simplified multi-stage workflow. First, we need to call two long-running methods that return a product price in the EUR and the EUR/USD exchange rate. Then, we need to calculate the net product price from the results of these methods. Then, we need to call the third long-running method that takes the net product price and returns the tax amount. Finally, we need to calculate the gross product price from the net product price and the tax amount.
 
 Implementation of this workflow is divided into the following tasks:
-
-
 
 1. to get the product price in the EUR (a slow task)
 2. to get the EUR/USD exchange rate (a slow task)
